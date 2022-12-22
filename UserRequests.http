@@ -1,0 +1,4 @@
+###
+#Get all useres
+GET http://localhost:8080/getallemployees
+Accept: application/json
