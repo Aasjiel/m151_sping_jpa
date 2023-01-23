@@ -2,6 +2,7 @@ package ch.bbw.es.m151springjpa.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Player {
