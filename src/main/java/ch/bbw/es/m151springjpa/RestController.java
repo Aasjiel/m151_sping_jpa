@@ -72,6 +72,9 @@ public class RestController {
         Player playerToUpdate = playerRepository.findById(id).get();
         playerToUpdate.setPlayer_name(player.getPlayer_name());
         playerToUpdate.setLevel(player.getLevel());
+        playerToUpdate.setGuild(player.getGuild());
+        playerToUpdate.setBuffs(player.getBuffs());
+        playerToUpdate.setWeapon(player.getWeapon());
         playerRepository.save(playerToUpdate);
     }
 
