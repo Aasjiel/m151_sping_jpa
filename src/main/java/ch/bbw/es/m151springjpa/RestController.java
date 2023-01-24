@@ -107,4 +107,32 @@ public class RestController {
     public void deleteGuild(@PathVariable int id) {
         guildRepository.deleteById(id);
     }
+
+    @PostMapping("/weapon")
+    public void createWeapon(@RequestBody Weapon weapon) {
+        weaponRepository.save(weapon);
+    }
+
+    @GetMapping("/weapon")
+    public Iterable<Weapon> getWeapon() {
+        return weaponRepository.findAll();
+    }
+
+    @GetMapping("/weapon/{id}")
+    public Weapon getWeaponById(@PathVariable int id) {
+        return weaponRepository.findById(id).get();
+    }
+
+    @PutMapping("/weapon/{id}")
+    public void updateWeapon(@PathVariable int id, @RequestBody Weapon weapon) {
+        Weapon weaponToUpdate = weaponRepository.findById(id).get();
+        weaponToUpdate.setWeapon_name(weapon.getWeapon_name());
+        weaponToUpdate.setDamage(weapon.getDamage());
+        weaponRepository.save(weaponToUpdate);
+    }
+
+    @DeleteMapping("/weapon/{id}")
+    public void deleteWeapon(@PathVariable int id) {
+        weaponRepository.deleteById(id);
+    }
 }
