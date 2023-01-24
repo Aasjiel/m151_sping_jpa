@@ -80,5 +80,31 @@ public class RestController {
         playerRepository.deleteById(id);
     }
 
-    
+    @PostMapping("/guild")
+    public void createGuild(@RequestBody Guild guild) {
+        guildRepository.save(guild);
+    }
+
+    @GetMapping("/guild")
+    public Iterable<Guild> getGuild() {
+        return guildRepository.findAll();
+    }
+
+    @GetMapping("/guild/{id}")
+    public Guild getGuildById(@PathVariable int id) {
+        return guildRepository.findById(id).get();
+    }
+
+    @PutMapping("/guild/{id}")
+    public void updateGuild(@PathVariable int id, @RequestBody Guild guild) {
+        Guild guildToUpdate = guildRepository.findById(id).get();
+        guildToUpdate.setGuild_name(guild.getGuild_name());
+        guildToUpdate.setGuild_rep(guild.getGuild_rep());
+        guildRepository.save(guildToUpdate);
+    }
+
+    @DeleteMapping("/guild/{id}")
+    public void deleteGuild(@PathVariable int id) {
+        guildRepository.deleteById(id);
+    }
 }
