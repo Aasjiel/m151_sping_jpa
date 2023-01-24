@@ -1,22 +1,26 @@
 package ch.bbw.es.m151springjpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Player {
     @Id
-    int playerid;
+    int playerID;
     String player_name;
     int level;
 
+    @OneToMany(mappedBy = "player1")
+    List<Friends> friendsList;
+
+
     public int getPlayerid() {
-        return playerid;
+        return playerID;
     }
 
     public void setPlayerid(int playerid) {
-        this.playerid = playerid;
+        this.playerID = playerid;
     }
 
     public String getPlayer_name() {
