@@ -135,4 +135,32 @@ public class RestController {
     public void deleteWeapon(@PathVariable int id) {
         weaponRepository.deleteById(id);
     }
+
+    @PostMapping("/buff")
+    public void createBuff(@RequestBody Buff buff) {
+        buffRepository.save(buff);
+    }
+
+    @GetMapping("/buff")
+    public Iterable<Buff> getBuff() {
+        return buffRepository.findAll();
+    }
+
+    @GetMapping("/buff/{id}")
+    public Buff getBuffById(@PathVariable int id) {
+        return buffRepository.findById(id).get();
+    }
+
+    @PutMapping("/buff/{id}")
+    public void updateBuff(@PathVariable int id, @RequestBody Buff buff) {
+        Buff buffToUpdate = buffRepository.findById(id).get();
+        buffToUpdate.setBuff_name(buff.getBuff_name());
+        buffToUpdate.setBuff_level(buff.getBuff_level());
+        buffRepository.save(buffToUpdate);
+    }
+
+    @DeleteMapping("/buff/{id}")
+    public void deleteBuff(@PathVariable int id) {
+        buffRepository.deleteById(id);
+    }
 }
