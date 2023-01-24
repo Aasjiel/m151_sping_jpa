@@ -1,11 +1,7 @@
 package ch.bbw.es.m151springjpa;
 
-import ch.bbw.es.m151springjpa.model.Friends;
-import ch.bbw.es.m151springjpa.model.Guild;
-import ch.bbw.es.m151springjpa.repository.FriendsRepository;
-import ch.bbw.es.m151springjpa.repository.GuildRepository;
-import ch.bbw.es.m151springjpa.repository.PlayerRepository;
-import ch.bbw.es.m151springjpa.repository.WeaponRepository;
+import ch.bbw.es.m151springjpa.model.*;
+import ch.bbw.es.m151springjpa.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +19,9 @@ public class RestController {
 
     @Autowired
     private WeaponRepository weaponRepository;
+
+    @Autowired
+    private BuffRepository buffRepository;
 
     @PostMapping("/friends")
     public void createFriends(@RequestBody Friends friends) {
@@ -52,4 +51,34 @@ public class RestController {
     public void deleteFriends(@PathVariable int id) {
         friendsRepository.deleteById(id);
     }
+
+    @PostMapping("/player")
+    public void createPlayer(@RequestBody Player player) {
+        playerRepository.save(player);
+    }
+
+    @GetMapping("/player")
+    public Iterable<Player> getPlayer() {
+        return playerRepository.findAll();
+    }
+
+    @GetMapping("/player/{id}")
+    public Player getPlayerById(@PathVariable int id) {
+        return playerRepository.findById(id).get();
+    }
+
+    @PutMapping("/player/{id}")
+    public void updatePlayer(@PathVariable int id, @RequestBody Player player) {
+        Player playerToUpdate = playerRepository.findById(id).get();
+        playerToUpdate.setPlayer_name(player.getPlayer_name());
+        playerToUpdate.setLevel(player.getLevel());
+        playerRepository.save(playerToUpdate);
+    }
+
+    @DeleteMapping("/player/{id}")
+    public void deletePlayer(@PathVariable int id) {
+        playerRepository.deleteById(id);
+    }
+
+    
 }
