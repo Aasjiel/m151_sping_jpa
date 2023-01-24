@@ -1,14 +1,34 @@
 package ch.bbw.es.m151springjpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "guild")
+@NamedQuery(name = "Guild.findAll", query = "FROM Guild")
 public class Guild {
     @Id
+    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     int guildID;
+    @Column(name = "guild_name")
     String guild_name;
+    @Column(name = "guild_rep")
     int guild_rep;
+
+    @OneToMany(mappedBy = "guild")
+    @JsonIgnore
+    List<Player> players;
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
 
     public int getGuildID() {
         return guildID;
