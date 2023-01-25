@@ -25,7 +25,6 @@ public class Player {
             joinColumns = @JoinColumn(name = "player_id"),
             inverseJoinColumns = @JoinColumn(name = "buff_id")
     )
-    @JsonIgnore
     List<Buff> buffs;
 
     @ManyToOne
